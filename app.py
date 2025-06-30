@@ -4,10 +4,13 @@ import torch
 
 app = Flask(__name__)
 
-# Load tokenizer and model from local directory
+# Load tokenizer and model using safetensors format
 MODEL_DIR = "./intent-bert"
 tokenizer = DistilBertTokenizer.from_pretrained(MODEL_DIR)
-model = DistilBertForSequenceClassification.from_pretrained(MODEL_DIR)
+model = DistilBertForSequenceClassification.from_pretrained(
+    MODEL_DIR,
+    use_safetensors=True  
+)
 model.eval()
 
 # Label map used during training (must match training order)
@@ -35,7 +38,6 @@ def predict():
         intent = label_map.get(predicted_class, "unknown")
 
     return jsonify({"intent": intent})
-
 
 if __name__ == "__main__":
     import os
