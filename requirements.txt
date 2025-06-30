@@ -1,4 +1,5 @@
-flask
-transformers
-torch
-python-dotenv
+Flask==3.1.1
+torch==2.7.1+cpu
+transformers==4.53.0
+safetensors==0.5.3
+-f https://download.pytorch.org/whl/torch_stable.html
